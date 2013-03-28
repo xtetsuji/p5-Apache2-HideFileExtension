@@ -1,0 +1,6 @@
+Revision history for Perl extension Apache2::HideFileExtension.
+
+0.01  Tue Mar 19 17:44:03 2013
+	- original version; created by h2xs 1.23 with options
+		-AX -n Apache2::HideFileExtension
+
