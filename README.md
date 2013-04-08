@@ -23,7 +23,7 @@ TODO: to create rpm and deb package.
 
 #DEPENDENCIES
 
-This module has dependencies only mod_perl2 core modules.
+This module has dependencies only mod\_perl2 core modules.
 
 #COPYRIGHT AND LICENCE
 
