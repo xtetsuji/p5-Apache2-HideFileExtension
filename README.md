@@ -5,17 +5,17 @@ Apache2-HideFileExtension version 0.01
 
 To install this module type the following:
 
-  perl Makefile.PL
-  make
-  make test
-  make install
+    perl Makefile.PL
+    make
+    make test
+    make install
 
 or using cpanm:
 
-  git clone https://github.com/xtetsuji/p5-Apache2-HideFileExtension.git
-  cpanm p5-Apache2-HideFileExtension/
+    git clone https://github.com/xtetsuji/p5-Apache2-HideFileExtension.git
+    cpanm p5-Apache2-HideFileExtension/
 
-TODO: to create rpm and deb package.
+**TODO**: to create rpm and deb package.
 
 #DEPENDENCIES
 
