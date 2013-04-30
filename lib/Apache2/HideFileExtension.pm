@@ -63,7 +63,38 @@ Apache2::HideFileExtension - Access "/path/to/SOMEONE.html" as "/path/to/SOMEONE
 
 =head1 DESCRIPTION
 
+This modules hide your specify file extension on some context
+(e.g. E<lt>DirectoryE<gt>, E<lt>LocationE<gt> and so on.).
+
+=head1 MECHANISM
+
+This module is recommended to hook at B<PerlHeaderPerserHandler>,
+because we want to finished "URL Trans Phase" (PerlTransHandler) and
+"Map to Storage Phase" (PerlMapToStorageHandler).
+In this situation, finally URL and it's file path are determined.
+
+This module searches either the file path is exists or not.
+If it is exists, then the module send redirection url without extension.
+
+Or the module gives request without the extension,
+it causes Apache internal redirect with the extension.
+Of course, this module ignores internal redirect's sub-request for
+avoid infinite loop.
+
+Apache internal redirect (Apache default-handler) handlings
+some troublesome HTTP request processing,
+e.g. HTTP 206 Partial Request, and so on.
+
+If you understand mod_perl2 mechanism, and you run other rewrite process
+at following native handler or Perl*Handler,
+you can set this module at PerlFixupHandler.
+
+Caution if you use mod_rewrite at E<lt>DirectoryE<gt> context,
+then mod_rewrite may work something at fixup-handler.
+
 =head1 SEE ALSO
+
+L<Description of HeaderParserhandler|http://perl.apache.org/docs/2.0/user/handlers/http.html#PerlHeaderParserHandler>
 
 =head1 AUTHOR
 
