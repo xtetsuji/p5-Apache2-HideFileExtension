@@ -17,23 +17,21 @@ sub handler {
     return Apache2::Const::DECLINED if !$r->is_initial_req;
 
     my $hide_ext = $r->dir_config->get('HideExtension') || '.html';
-    my $schema   = 'http://'; # for internal redirect. TOOD: under SSL env?
-    my $hostname = $r->hostname;
-    my $uri      = $r->uri;
     my $filename = $r->filename;
-    my $url      = $schema . $hostname . $uri;
 
     $hide_ext = '.' . $hide_ext if 0 != index $hide_ext, '.';
 
     if ( $filename =~ /\Q$hide_ext\E$/ ) {
+        my $schema = 'http://'; # for HTTP redirect. TOOD: under SSL env?
+        my $url    = $schema . $r->hostname . $r->uri;
         $url =~ s/\Q$hide_ext\E$//
             or return Apache2::Const::DECLINED;
         $r->headers_out->set( Location => $url );
         return Apache2::Const::HTTP_MOVED_TEMPORARILY;
     }
     elsif ( -f $filename . $hide_ext ) {
-        $url .= $hide_ext;
-        $r->internal_redirect($url);
+        my $new_uri = $r->uri . $hide_ext;
+        $r->internal_redirect($new_uri);
         return Apache2::Const::OK;
     }
 
